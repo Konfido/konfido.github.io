@@ -1,0 +1,12 @@
+[
+    {
+       "name":"PDF2Audio",
+       "url":"Convert PDFs to Audiobooks with Machine Learning",
+       "desc":"Convert PDFs to Audiobooks with Machine Learning"
+    },
+    {
+        "name": "Alfred PKManager",
+        "url": "https://github.com/Konfido/alfred-pkmanager",
+        "desc": "A handful Alfred Workflow which helps searching and managing your Personal Knowledge Markdown notes."
+    }
+]

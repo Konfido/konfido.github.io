@@ -1,0 +1,29 @@
+<% if(page.comments){ %>
+    <% if(theme.disqus.enabled){ %>
+        <div class="blog-post-comments">
+            <div id="disqus_thread">
+                <noscript><%= __('comments.no_js') %></noscript>
+            </div>
+        </div>
+    <% } else if (theme.waline.enabled && theme.waline.server_url) { %>
+        <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+        <div class="blog-post-comments">
+            <div id="vcomments"></div>
+            <script>
+                var visitor = '<%= theme.waline.visitor %>' == true ? true : false;
+                new Waline({
+                    el: '#vcomments',
+                    serverURL: '<%= theme.waline.server_url %>',
+                    placeholder: '<%= theme.waline.placeholder %>',
+                    wordLimit: '<%= theme.waline.word_limit %>',
+                    avatar: '<%= theme.waline.avatar %>',
+                    pageSize: '<%= theme.waline.pageSize %>',
+                    lang: '<%= theme.waline.lang %>',
+                    visitor: visitor,
+                    dark: 'auto',
+                    requiredField: '<%= theme.waline.required_field %>'
+                    });
+            </script>
+        </div>
+    <% } %>
+<% } %>
