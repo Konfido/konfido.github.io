@@ -133,6 +133,16 @@ open_graph:
   twitter_id:
   google_plus:
 
+donation:
+  # Enable display of donation in every article.
+  enabled: true
+  comment: "Consider buying me a drink if you like this post."
+  platform:
+    wechatpay: /images/wechatpay.png
+    alipay: /images/alipay.png
+    paypal: /images/paypal.png
+    coffee: /images/coffee.png
+    #bitcoin: /images/bitcoin.png
 
 ##############################################################################
 # Plugins

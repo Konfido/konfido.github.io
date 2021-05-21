@@ -67,3 +67,11 @@ comments:
 tooltip:
   copy_tip: Copy to clipboard!
   copied: Copied!
+
+donation:
+  button: Donate
+  wechatpay: WeChat Pay
+  alipay: Alipay
+  paypal: PayPal
+  bitcoin: Bitcoin
+  coffee: Buy Me a Coffee

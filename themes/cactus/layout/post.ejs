@@ -22,4 +22,7 @@
     <%- page.content %>
   </div>
 </article>
+<% if (theme.donation.enabled){ %>
+  <%- partial('_partial/donation') %>
+<% } %>
 <%- partial('_partial/comments') %>

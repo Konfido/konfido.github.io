@@ -44,3 +44,11 @@ comments:
 tooltip:
   copy_tip: 复制到粘贴板!
   copied: 复制成功!
+
+donation:
+  button: 赞赏
+  wechatpay: 微信支付
+  alipay: 支付宝
+  paypal: PayPal
+  bitcoin: 比特币
+  coffee: 请我喝杯咖啡
