@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="What we want to do?  We want to access the data in Cloud Storage through API from App Script. But Google Cloud Storage, unlike Spreadsheet, is not a built-in services in App Script, so we need to take">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Request to Cloud Storage API in Apps Script with OAuth2">
+<meta property="og:url" content="https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/index.html">
+<meta property="og:site_name" content="Konfido&#39;s Blog">
+<meta property="og:description" content="What we want to do?  We want to access the data in Cloud Storage through API from App Script. But Google Cloud Storage, unlike Spreadsheet, is not a built-in services in App Script, so we need to take">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://konfido.github.io/images/20210512153630363.png">
+<meta property="og:image" content="https://konfido.github.io/images/20210512153656860.png">
+<meta property="article:published_time" content="2021-05-10T08:22:28.000Z">
+<meta property="article:modified_time" content="2021-05-10T08:22:28.000Z">
+<meta property="article:author" content="Konfido">
+<meta property="article:tag" content="dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://konfido.github.io/images/20210512153630363.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Request to Cloud Storage API in Apps Script with OAuth2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Konfido's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/Convert-PDFs-to-Audiobooks-with-Machine-Learning/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&text=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&is_video=false&description=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Request to Cloud Storage API in Apps Script with OAuth2&body=Check out this article: https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&name=Request to Cloud Storage API in Apps Script with OAuth2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&t=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-we-want-to-do"><span class="toc-number">1.</span> <span class="toc-text">What we want to do?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-steps-we-should-perform"><span class="toc-number">2.</span> <span class="toc-text">What steps we should perform?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-data-do-our-script-app-want-to-access"><span class="toc-number">3.</span> <span class="toc-text">What data do our Script App want to access?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-create-credentials-and-perform-authentication"><span class="toc-number">4.</span> <span class="toc-text">How to create credentials and perform authentication?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-automatically-fetch-the-access-token"><span class="toc-number">5.</span> <span class="toc-text">How to automatically fetch the access token?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-do-we-manage-credentials"><span class="toc-number">6.</span> <span class="toc-text">How do we manage credentials?</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Request to Cloud Storage API in Apps Script with OAuth2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Konfido</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-10T08:22:28.000Z" itemprop="datePublished">2021-05-10</time>
+        
+        (Updated: <time datetime="2021-05-10T08:22:28.000Z" itemprop="dateModified">2021-05-10</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/dev/" rel="tag">dev</a>
+    </div>
+
+
+      
+    <span id="/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/" class="leancloud_visitors" ">
+        <em class="meta-seperator">|</em>
+        <i class="fa fa-eye"></i>
+        <i class="leancloud-visitors-count"></i>
+    </span>
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="what-we-want-to-do">What we want to do?</h2>
+<ul>
+<li>We want to access the data in Cloud Storage through API from App Script.</li>
+<li>But Google Cloud Storage, unlike <a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/spreadsheet">Spreadsheet</a>, is not a built-in services in App Script, so we need to take an extra step to pass the credential.</li>
+<li>From the <a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/authentication">document</a>, we know that the Cloud Storage uses OAuth2 protocol for API authentication and authorization.</li>
+</ul>
+<h2 id="what-steps-we-should-perform">What steps we should perform?</h2>
+<ul>
+<li><p>Authentication: First we (user/server) make a request for access token as a client.</p>
+<blockquote>
+<p>"Authentication is the process of determining the identity of a client."</p>
+</blockquote></li>
+<li><p>Authorization: Then the App calling Google APIs with the access token</p>
+<blockquote>
+<p>"Authorization is the process of determining what permissions an authenticated identity has on a set of specified resources."</p>
+</blockquote></li>
+</ul>
+<h2 id="what-data-do-our-script-app-want-to-access">What data do our Script App want to access?</h2>
+<ul>
+<li><p>We need to identify our entity (human or non-human) by type of the data we want to access.</p></li>
+<li><p>Here, our App need to access resources stored in Cloud Storage and perform actions on its own, so it holds a <strong>server account credential </strong>, which represents non-human users and follow the <a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/authentication#oauth-flows">server-centric auth flow</a>.</p></li>
+<li><p>But if your app need to access the end user's data, you need to obtain <a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/authentication#user_accounts">user account credential</a> which allows the end user signing in to complete authentication.</p></li>
+</ul>
+<h2 id="how-to-create-credentials-and-perform-authentication">How to create credentials and perform authentication?</h2>
+<p>It introduced three options to perform authentication in the <a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/authentication#gsutilauth">document</a>. If you develop locally or want to deploy with command line, you can select the first two methods with gsutil installed and pass credential (key file) to the environment. And you may also need to install command line tool <a target="_blank" rel="noopener" href="https://github.com/google/clasp">clasp</a> helping you creating the deployment. But if you just want to deploy the App Script on the web editor, like I do, then choose the last method.</p>
+<ol type="1">
+<li><p>gsutil authentication</p>
+<ul>
+<li><p>Use/create a service account, and download the associated private key which contains your service account credential.</p></li>
+<li><p>Use gcloud command to authenticate:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud auth activate-service-account --key-file xxx</span><br></pre></td></tr></table></figure></p></li>
+</ul></li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/reference/libraries">Client library authentication</a></p>
+<ul>
+<li><p>Install the client library for corresponding languages, e.g. Node.js</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save @google-cloud/storage</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Create a service account in the Cloud Console.</p></li>
+<li><p>Create and download JSON <strong>service key</strong> file.</p></li>
+<li><p>Setting the environment variable in current shell session</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOOGLE_APPLICATION_CREDENTIALS=<span class="string">&quot;KEY_PATH&quot;</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>Pass the application credentials to the client library</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Imports the Google Cloud client library</span></span><br><span class="line"><span class="keyword">const</span> &#123;Storage&#125; = <span class="built_in">require</span>(<span class="string">&#x27;@google-cloud/storage&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> storage = <span class="keyword">new</span> Storage();</span><br><span class="line"><span class="keyword">const</span> bucketName = <span class="string">&#x27;your-unique-bucket-name&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">createBucket</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> storage.createBucket(bucketName);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Bucket <span class="subst">$&#123;bucketName&#125;</span> created.`</span>);</span><br><span class="line">&#125;</span><br><span class="line">createBucket().catch(<span class="built_in">console</span>.error);</span><br></pre></td></tr></table></figure></p></li>
+</ul></li>
+<li><p><a target="_blank" rel="noopener" href="https://developers.google.com/identity/protocols/oauth2">API authentication under OAuth2 protocol</a></p>
+<ul>
+<li><p>It allows your application to access Google Cloud APIs on behalf of the end user.</p></li>
+<li><p>The first way to perform authentication is making requests to Cloud Storage (XML/JSON) API, which requires a valid OAuth2 access token.</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Code.gs</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;https://storage.googleapis.co/BUCKET/OBJECT&#x27;</span></span><br><span class="line"><span class="keyword">var</span> resp = UrlFetchApp.fetch(url, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="attr">Authorization</span>: <span class="string">&#x27;Bearer &#x27;</span>+ OAUTH2_TOKEN</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;muteHttpExceptions&#x27;</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p></li>
+<li><p>You can generate an access token in the <a target="_blank" rel="noopener" href="https://developers.google.com/oauthplayground/">OAuth2 Playground</a></p>
+<ul>
+<li>"Select &amp; authorize APIs": <code>Cloud Storage API v1</code></li>
+<li>Choose the API with right <a target="_blank" rel="noopener" href="https://cloud.google.com/storage/docs/authentication#oauth-scopes">scopes</a>: read-only, read-write, full-control... Here we choose <code>https://www.googleapis.com/auth/devstorage.read_write</code>.</li>
+<li>Click <code>Authorize APIs</code></li>
+<li>Click <code>Exchange authorization code for tokens</code>, and copy the "Access token"</li>
+</ul></li>
+<li><p>Cons</p>
+<ul>
+<li>The access token expires in one hour, so we need to refresh the access token frequently.</li>
+<li>We can use a refresh token to ease this inconvenience, but the refresh token also expires in 24 hours.</li>
+</ul></li>
+<li><p>Find the detailed guiding steps introduced by Microsoft in the following article: <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/advertising/scripts/examples/authenticating-with-google-services">Authenticating with Google services</a></p></li>
+</ul></li>
+</ol>
+<h2 id="how-to-automatically-fetch-the-access-token">How to automatically fetch the access token?</h2>
+<ul>
+<li><p>We expect to improve the procedures of the third method, hoping the access token can be automatically fetched. The solution is redirecting the Script web app to a clickable consent screen once the access token expires, and use the library "<a target="_blank" rel="noopener" href="https://github.com/googleworkspace/apps-script-oauth2">OAuth2</a>" to deal with authentication parts.</p>
+<p><img src="../images/20210512153630363.png" width="80%;" /></p></li>
+<li><p>Add OAuth2</p>
+<ul>
+<li>Click the icon <code>+</code> next to "Libararies" in Script page</li>
+<li>Search the ID of "OAuth2" and add it: "1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF"</li>
+</ul></li>
+<li><p>Create credentials</p>
+<ul>
+<li>Find your Script's ID by clicking on the menu item "Project Settings".</li>
+<li>Go to Cloud platform console, navigate to "API &amp; Services &gt; Credentials"</li>
+<li>Click on <code>+ CREATE CREDENTIALS</code> &gt; <code>OAuth Client ID</code> &gt; <code>Web Application</code></li>
+<li>Add "https://script.google.com" to "Authorised JavaScript origins"</li>
+<li>Add the following URIs (with {SCRIPT ID} replaced) to "Authorized redirect URIs" <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment of Apps Script</span></span><br><span class="line">https://script.google.com/macros/d/&#123;SCRIPT ID&#125;/usercallback</span><br><span class="line"><span class="comment"># Test deployment, its ID differs with the upper deployment&#x27;s</span></span><br><span class="line">https://script.google.com/macros/s/&#123;TEST SCRIPT ID&#125;/usercallback</span><br></pre></td></tr></table></figure></li>
+<li>Get the "Client ID" and "Client Secret" of this OAuth Client</li>
+</ul></li>
+<li><p>Usage of credentials</p>
+<ul>
+<li><p>Back to Script, and paste your "Client ID"&amp;"Client Secret" on the config part of the "Code.gs" file.</p></li>
+<li><p>Like the "OAuth2" lib <a target="_blank" rel="noopener" href="https://github.com/googleworkspace/apps-script-oauth2#2-direct-the-user-to-the-authorization-url">said</a>, "Apps Script UI's are not allowed to redirect the user's window to a new URL, so you'll need to present the authorization URL as a link for the user to click. " So modify the doGet() function to present the url of "Consent Screen" once "OAuth2" does not "hasAccess()". <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doGet</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  Logger.log(e.parameter);</span><br><span class="line">  <span class="keyword">var</span> storageService = getService();</span><br><span class="line">  <span class="keyword">if</span> (storageService.hasAccess()) &#123;</span><br><span class="line">    <span class="keyword">var</span> html = HtmlService.createTemplateFromFile(<span class="string">&#x27;index&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> html.evaluate();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Show the clickable authorization url</span></span><br><span class="line">    <span class="keyword">var</span> authorizationUrl = storageService.getAuthorizationUrl();</span><br><span class="line">    <span class="keyword">var</span> template = HtmlService.createTemplate(</span><br><span class="line">      <span class="string">&#x27;&lt;a&gt; Click the link ---&gt; &lt;/a&gt;&#x27;</span>+</span><br><span class="line">      <span class="string">&#x27;&lt;a href=&quot;&lt;?= authorizationUrl ?&gt;&quot;target=&quot;_blank&quot;&gt;Authorize&lt;/a&gt;&#x27;</span>+</span><br><span class="line">      <span class="string">&#x27;&lt;p&gt; Refresh this page after you complete the authorization.&lt;/p&gt;&#x27;</span></span><br><span class="line">    );</span><br><span class="line">    template.authorizationUrl = authorizationUrl;</span><br><span class="line">    Logger.log(<span class="string">&#x27;Open the following URL and re-run the script: %s&#x27;</span>, authorizationUrl);</span><br><span class="line">    <span class="keyword">return</span> template.evaluate();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="../images/20210512153656860.png" width="90%;" /></p></li>
+</ul></li>
+<li><p>Once you've done the previous steps and seen the "Consent Screen" page, it will say, "Google hasn’t verified this app". Just click on "Continue", or you can follow the official <a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/guides/client-verification#requesting_verification">document</a> to deal with it.</p></li>
+<li><p>Check out my program of <a target="_blank" rel="noopener" href="https://github.com/Konfido/pdf2audiobook">pdf2audiobook</a> to see the details of implementation.</p></li>
+</ul>
+<h2 id="how-do-we-manage-credentials">How do we manage credentials?</h2>
+<ul>
+<li>"Do not embed secrets related to authentication in source code" (Check out <a target="_blank" rel="noopener" href="https://cloud.google.com/docs/authentication/production#best_practices">best practices for managing credentials.</a> )So we need an another way to safely store our CLIENT_ID and CLIENT_SECRET.</li>
+<li>Instead of embedding ID &amp; SECRET directly in the gs code, I could use an input box to pass them in the authorization page. But as they stay in the back-end server side (I assume), so I just gonna bear with it.</li>
+<li>If you know any simpler and safer way to do it, please leave it in the comments.</li>
+</ul>
+
+  </div>
+</article>
+
+  <div class="reward-container">
+  <div>Consider buying me a drink if you like this post.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/wechatpay.png">
+      <p>WeChat Pay</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/alipay.png">
+      <p>Alipay</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/paypal.png">
+      <p>PayPal</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/coffee.png">
+      <p>Buy Me a Coffee</p>
+    </div>
+    
+  </div>
+</div>
+
+
+
+    
+        <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+        <div class="blog-post-comments">
+            <div id="vcomments"></div>
+            <script>
+                var visitor = 'true' == true ? true : false;
+                new Waline({
+                    el: '#vcomments',
+                    serverURL: 'https://waline-comments.vercel.app/',
+                    placeholder: 'Support for anonymous comments.',
+                    wordLimit: '350',
+                    avatar: 'mp',
+                    pageSize: '10',
+                    lang: 'en',
+                    visitor: visitor,
+                    dark: 'auto',
+                    requiredField: ''
+                    });
+            </script>
+        </div>
+    
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-we-want-to-do"><span class="toc-number">1.</span> <span class="toc-text">What we want to do?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-steps-we-should-perform"><span class="toc-number">2.</span> <span class="toc-text">What steps we should perform?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-data-do-our-script-app-want-to-access"><span class="toc-number">3.</span> <span class="toc-text">What data do our Script App want to access?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-create-credentials-and-perform-authentication"><span class="toc-number">4.</span> <span class="toc-text">How to create credentials and perform authentication?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-automatically-fetch-the-access-token"><span class="toc-number">5.</span> <span class="toc-text">How to automatically fetch the access token?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-do-we-manage-credentials"><span class="toc-number">6.</span> <span class="toc-text">How do we manage credentials?</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&text=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&is_video=false&description=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Request to Cloud Storage API in Apps Script with OAuth2&body=Check out this article: https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&title=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&name=Request to Cloud Storage API in Apps Script with OAuth2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://konfido.github.io/Request-to-Cloud-Storage-API-in-Apps-Script-with-OAuth2/&t=Request to Cloud Storage API in Apps Script with OAuth2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2017-2021
+    Konfido
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120506290-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-120506290-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?402f987e4873e1ee456b67464a20826f";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
