@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="改善Windows10笔记本触控板体验的方法！！ 背景 一直以来，我都无比羡慕MacBook超强大的触控板，其可以脱离鼠标进行各种高效的操作。随着对笔记本使用的增加，我越来越忍受不了手里这台联想笔记本的“智障式”触摸板，并让我十分的好奇：“为什么Windows的触控板会如此难用？” 然而，这两天查找了各种资料，惊喜的发现这个问题是可以被解决的！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10笔记本触控板重生">
+<meta property="og:url" content="https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/index.html">
+<meta property="og:site_name" content="Konfido&#39;s Blog">
+<meta property="og:description" content="改善Windows10笔记本触控板体验的方法！！ 背景 一直以来，我都无比羡慕MacBook超强大的触控板，其可以脱离鼠标进行各种高效的操作。随着对笔记本使用的增加，我越来越忍受不了手里这台联想笔记本的“智障式”触摸板，并让我十分的好奇：“为什么Windows的触控板会如此难用？” 然而，这两天查找了各种资料，惊喜的发现这个问题是可以被解决的！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://konfido.github.io/images/20180618110805000.png">
+<meta property="og:image" content="https://konfido.github.io/images/20180618110805001.png">
+<meta property="article:published_time" content="2018-06-17T07:31:54.000Z">
+<meta property="article:modified_time" content="2018-06-18T06:31:06.000Z">
+<meta property="article:author" content="Konfido">
+<meta property="article:tag" content="Productivity">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://konfido.github.io/images/20180618110805000.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Win10笔记本触控板重生</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Konfido's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/data-processing-with-pandas/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&text=Win10笔记本触控板重生"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&is_video=false&description=Win10笔记本触控板重生"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Win10笔记本触控板重生&body=Check out this article: https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&name=Win10笔记本触控板重生&description=&lt;p&gt;改善Windows10笔记本触控板体验的方法！！&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;一直以来，我都无比羡慕MacBook超强大的触控板，其可以脱离鼠标进行各种高效的操作。随着对笔记本使用的增加，我越来越忍受不了手里这台联想笔记本的“智障式”触摸板，并让我十分的好奇：“为什么Windows的触控板会如此难用？” 然而，这两天查找了&lt;a href=&#34;Win10%E7%AC%94%E8%AE%B0%E6%9C%AC%E8%A7%A6%E6%8E%A7%E6%9D%BF%E9%87%8D%E7%94%9F.md#%E5%8F%82%E8%80%83%E6%BA%90&#34;&gt;各种资料&lt;/a&gt;，惊喜的发现这个问题是可以被解决的！&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&t=Win10笔记本触控板重生"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E7%A1%AE%E5%BC%8F%E8%A7%A6%E6%8E%A7precision-touchpad"><span class="toc-number">2.</span> <span class="toc-text">精确式触控(Precision Touchpad)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text">我的设备信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">操作步骤</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Win10笔记本触控板重生
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Konfido</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-06-17T07:31:54.000Z" itemprop="datePublished">2018-06-17</time>
+        
+        (Updated: <time datetime="2018-06-18T06:31:06.000Z" itemprop="dateModified">2018-06-18</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Productivity/" rel="tag">Productivity</a>, <a class="tag-link-link" href="/tags/Windows/" rel="tag">Windows</a>
+    </div>
+
+
+      
+    <span id="/Rebirth-of-Touchpad-on-Win10-Laptop/" class="leancloud_visitors">
+        <span class="meta-seperator">|</span>
+        <i class="fa fa-eye"></i>
+        <i class="leancloud-visitors-count"></i>
+    </span>
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>改善Windows10笔记本触控板体验的方法！！</p>
+<h2 id="背景">背景</h2>
+<p>一直以来，我都无比羡慕MacBook超强大的触控板，其可以脱离鼠标进行各种高效的操作。随着对笔记本使用的增加，我越来越忍受不了手里这台联想笔记本的“智障式”触摸板，并让我十分的好奇：“为什么Windows的触控板会如此难用？” 然而，这两天查找了<a href="Win10%E7%AC%94%E8%AE%B0%E6%9C%AC%E8%A7%A6%E6%8E%A7%E6%9D%BF%E9%87%8D%E7%94%9F.md#%E5%8F%82%E8%80%83%E6%BA%90">各种资料</a>，惊喜的发现这个问题是可以被解决的！</p>
+<span id="more"></span>
+<h2 id="精确式触控precision-touchpad">精确式触控(Precision Touchpad)</h2>
+<blockquote>
+<p>长久以来，在PC上触摸板的体验一直不尽人意。微软也一度试图解决这个问题，但PC厂商数量众多，产品也良莠不齐。面对这种状况，微软联合英特尔、义隆电子和新思科技提出“精确式触控板”概念。精确式触控板支持多点触控，并直接由Windows操作系统控制而非第三方驱动程序。相比与传统触摸板，精确式触摸板能够给用户提供更好的交互体验。</p>
+</blockquote>
+<h2 id="我的设备信息">我的设备信息</h2>
+<ul>
+<li>5年老机联想Y500</li>
+<li>操作系统：Windows 10 (Cumulative Update, Version 1706, x64-based Systems)</li>
+<li>触控板厂商：Elan</li>
+<li>触控板驱动： 联想适配，但2014年后不再更新。</li>
+</ul>
+<h2 id="操作步骤">操作步骤</h2>
+<ol type="1">
+<li>确定触控板厂商：Elan/Synaptics。 我的是Elan，其他Synaptics触控板可以参考这篇-&gt;<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28888470">文章</a></li>
+<li>下载精确式触控驱动。 去微软官方的<a target="_blank" rel="noopener" href="https://www.catalog.update.microsoft.com/Home.aspx">Microsoft update catalog</a>上搜索<code>elan wdf</code>，下载最新版驱动。 <strong>这里有几个细节</strong>：</li>
+</ol>
+<ul>
+<li>该驱动随Win10更新而更新，尽量下载最新版。</li>
+<li>当时我直觉认为列表最上面的是最新版，然后直接点选了第一条的<code>Elan - Other hardware - ELAN Input Device For WDF</code>，信息如下： <img src="../images/20180618110805000.png" alt="Screenshot from 2018-06-18 11-08-05" /> 然后，按之后步骤更新了驱动，是正常有效的。但是后来才发现此驱动更新日期为<code>2016/9/30</code>，不是最新版，但也不影响使用（摊手.jpg)...且效果提升已然很好，所以没有试其他的，你们可以自己试下其他的驱动。</li>
+</ul>
+<ol start="3" type="1">
+<li><p>将下载的驱动放到任意一个空的文件夹，并解压。</p></li>
+<li><p>双击dpinst.exe运行。 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28888470">参考这篇</a>是建议手动查找驱动然后更新的方法，比较麻烦，而且试的时候我的笔记本一直报错，索性选择直接运行解压后的dpinst.exe文件，发现是这样也是可以的。 <strong>更新：</strong> 昨天更新了win10系统至1803，触控板的驱动失效了，需要重新装，发现直接运行dpinst.exe并没有效果，于是按照<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28888470">参考文章</a>手动更新后才生效，方法： &gt;打开设备管理器，选择自己的触摸板设备，右键选择更新驱动。在弹出的窗口中选择“浏览我的计算机以查找驱动程序”，之后选则“让我从计算机上的可用驱动程序列表中选取”，再在弹出的窗口中选择<code>从磁盘安装</code>，选择刚刚才解压目录中的<code>AutoRun</code>(我点了<code>ETD.inf</code>)，一路next，之后重启就大功告成了。</p></li>
+<li><p>重启电脑后生效，系统设置中出现精确式触控的设置选项： <img src="../images/20180618110805001.png" alt="multi" /></p></li>
+<li><p>享受飞一般效率提升吧！！</p></li>
+<li><p>
+<p><span style="background-color:rgb(241, 239, 8);color:rgb(255, 15, 0)">注意：</span></p>
+</p></li>
+</ol>
+<ul>
+<li>此方法在我的电脑（联想Y500）上是可行的，其余厂商如Thinkpad、Dell、神州、微星等等在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28888470">这篇文章</a>中都有成功案例。但是不保证每台机器都有效，也有评论说按此方法更新驱动后出现各种问题，请自己斟酌。</li>
+<li>不想冒风险重装的，也可以试着通过修改注册表的方式更改设置：
+<ul>
+<li><code>Win + r</code>打开运行，输入<code>regedit</code>进入注册表页面。</li>
+<li>找到Elan驱动的注册表位置<code>[HKEY_CURRENT_USER\Software\Elantech]</code>，参考以下两篇文章操作： <a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/4099196263">修改注册表键值扩充y50触摸板功能</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/IKQMKSQM/article/details/73470032">关于elan触摸板实现三指点击的方法</a></li>
+<li>修改完成后，重启才能生效。</li>
+<li>如果失败，或者没用可以再改回来～</li>
+</ul></li>
+<li>安装完成后，一定记得重启电脑使更改生效。我弄完后没重启，发现触控板虽然可以识别，但是点击确认只能按压，无法通过触摸完成，然后绕了很多弯路都没解决，最后重启了才变正常(当然，也可能是因为没安装最新版驱动的原因)。</li>
+<li>发现三指或四指有时有误判的情况，可以适当的将手指略分开一点，误判会减少许多。</li>
+<li>新装的驱动注册表位置： <code>[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]</code>，可以自己继续更改探索～ ## 参考源</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28888470">为Synaptics与Elan驱动的触控板安装微软精确式触控板驱动</a></li>
+<li><a target="_blank" rel="noopener" href="http://drivers.softpedia.com/get/KEYBOARD-and-MOUSE/Elantech/ELAN-Input-Device-for-WDF-Driver-16-21-13-3-for-Windows-10-Anniversary-Update-64-bit.shtml">ELAN Input Device for WDF Driver 16.21.13.3 for Windows 10 Anniversary Update 64-bit</a></li>
+<li><a target="_blank" rel="noopener" href="https://answers.microsoft.com/en-us/windows/forum/windows8_1-hardware/two-finger-right-click-does-not-work/c7fa3239-0c53-4e7b-87d8-57170293513d">Two finger right click does not work</a></li>
+<li><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/4099196263">修改注册表键值扩充y50触摸板功能</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/IKQMKSQM/article/details/73470032">关于elan触摸板实现三指点击的方法</a></li>
+</ul>
+
+  </div>
+</article>
+
+  <div class="reward-container">
+  <div>Consider buying me a drink if you like this post.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/wechatpay.png">
+      <p>WeChat Pay</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/alipay.png">
+      <p>Alipay</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/paypal.png">
+      <p>PayPal</p>
+    </div>
+    
+      
+      
+        
+      
+    <div style="display: inline-block;">
+      <img src="/images/coffee.png">
+      <p>Buy Me a Coffee</p>
+    </div>
+    
+  </div>
+</div>
+
+
+
+    
+        <div class="blog-post-comments">
+            <div id="vcomments"></div>
+        </div>
+    
+
+
+
+<script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+<script>
+    new Waline({
+        el: '#vcomments',
+        serverURL: 'https://waline-comments.vercel.app/',
+        placeholder: 'Support for anonymous comments.',
+        wordLimit: '350',
+        avatar: 'mp',
+        pageSize: '10',
+        lang: 'en',
+        visitor: 'true',
+        dark: 'auto',
+        requiredMeta: 'name'
+        });
+</script>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E7%A1%AE%E5%BC%8F%E8%A7%A6%E6%8E%A7precision-touchpad"><span class="toc-number">2.</span> <span class="toc-text">精确式触控(Precision Touchpad)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text">我的设备信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">操作步骤</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&text=Win10笔记本触控板重生"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&is_video=false&description=Win10笔记本触控板重生"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Win10笔记本触控板重生&body=Check out this article: https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&title=Win10笔记本触控板重生"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&name=Win10笔记本触控板重生&description=&lt;p&gt;改善Windows10笔记本触控板体验的方法！！&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;一直以来，我都无比羡慕MacBook超强大的触控板，其可以脱离鼠标进行各种高效的操作。随着对笔记本使用的增加，我越来越忍受不了手里这台联想笔记本的“智障式”触摸板，并让我十分的好奇：“为什么Windows的触控板会如此难用？” 然而，这两天查找了&lt;a href=&#34;Win10%E7%AC%94%E8%AE%B0%E6%9C%AC%E8%A7%A6%E6%8E%A7%E6%9D%BF%E9%87%8D%E7%94%9F.md#%E5%8F%82%E8%80%83%E6%BA%90&#34;&gt;各种资料&lt;/a&gt;，惊喜的发现这个问题是可以被解决的！&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://konfido.github.io/Rebirth-of-Touchpad-on-Win10-Laptop/&t=Win10笔记本触控板重生"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2017-2021
+    Konfido
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120506290-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-120506290-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?402f987e4873e1ee456b67464a20826f";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
