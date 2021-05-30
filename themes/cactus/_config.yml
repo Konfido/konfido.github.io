@@ -167,7 +167,7 @@ waline:
   pageSize: 10
   lang: en
   visitor: true
-  required_fields: [name]
+  required_meta: [name]
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:

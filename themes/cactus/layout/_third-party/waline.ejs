@@ -1,0 +1,15 @@
+<script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+<script>
+    new Waline({
+        el: '#vcomments',
+        serverURL: '<%= theme.waline.server_url %>',
+        placeholder: '<%= theme.waline.placeholder %>',
+        wordLimit: '<%= theme.waline.word_limit %>',
+        avatar: '<%= theme.waline.avatar %>',
+        pageSize: '<%= theme.waline.pageSize %>',
+        lang: '<%= theme.waline.lang %>',
+        visitor: '<%= theme.waline.visitor %>',
+        dark: 'auto',
+        requiredMeta: '<%= theme.waline.required_meta %>'
+        });
+</script>
